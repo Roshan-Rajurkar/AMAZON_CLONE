@@ -2,27 +2,28 @@ import './App.css';
 import Header from './components/header/Header';
 import Home from '../src/pages/home/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Checkout from './pages/checkout/Checkout';
 
 function App() {
   return (
     <Router>
+      <h1>Let's go from 2.00 hrs</h1>
       <div className="App">
-        <h1>1:38 part3 Checkout Page</h1>
+        {/* header must be common all over the pages */}
+        <Header />
+
         <Routes>
+          {/* for the checkout page */}
+          <Route exact path='/checkout' element={
+            <>
+              <Checkout />
+            </>
+          } />
 
           {/* For the Home page */}
           <Route exact path="/" element={
             <>
-              <Header />
               <Home />
-            </>
-          } />
-
-          {/* for the checkout page */}
-          <Route exactpath='/checkout' element={
-            <>
-              <Header />
-              <h1>I am A Checkout Page</h1>
             </>
           } />
 
