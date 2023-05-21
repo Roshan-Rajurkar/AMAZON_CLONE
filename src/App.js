@@ -7,7 +7,7 @@ import Checkout from './pages/checkout/Checkout';
 function App() {
   return (
     <Router>
-      <h1>Let's go from 2.00 hrs</h1>
+      <h1 style={{ backgroundColor: 'red' }}>let's go from 2:26:00</h1>
       <div className="App">
         {/* header must be common all over the pages */}
         <Header />

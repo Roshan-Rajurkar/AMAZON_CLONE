@@ -1,8 +1,10 @@
 import React from 'react'
 import StarIcon from '@mui/icons-material/Star';
 import './Product.css'
+import { useStateValue } from '../stateProvider/StateProvider'
 
-const Product = ({ title, image, price, rating }) => {
+
+const Product = ({ id, title, image, price, rating }) => {
     const renderStars = () => {
         const stars = [];
         for (let i = 0; i < rating; i++) {
@@ -10,6 +12,26 @@ const Product = ({ title, image, price, rating }) => {
         }
         return stars;
     }
+
+    const [{ cart }, dispatch] = useStateValue();
+    console.log('this is the basket', cart)
+
+    const addToBasket = () => {
+        // dispatch action addToBasket
+        // const id = Math.random().toString(36).substr(2, 9);
+        dispatch({
+            type: 'ADD_TO_CART',
+            item: {
+                id,
+                title,
+                image,
+                price,
+                rating,
+            }
+        })
+    }
+
+
     return (
         <div className='product'>
 
@@ -29,7 +51,7 @@ const Product = ({ title, image, price, rating }) => {
             {/* img and add to card button */}
             <img src={image} alt="product cam" />
             {/* add to cart button */}
-            <button className='addButton'>Add To Cart</button>
+            <button className='addButton' onClick={addToBasket}>Add To Cart</button>
 
         </div>
     )
