@@ -4,12 +4,12 @@ import './Subtotal.css'
 import { useStateValue } from '../stateProvider/StateProvider'
 
 const Subtotal = () => {
-    const [{ cart }, dispatch] = useStateValue();
+    const [{ cart }] = useStateValue();
     const [subTotal, setSubTotal] = useState(0)
     const calculateSubTotal = () => {
-        const sum = cart.reduce((accumulator, value) => {
-            return accumulator + parseFloat(value.price)
-        }, 0)
+        const sum = cart?.reduce((amount, value) => {
+            return amount + parseFloat(value.price)
+        }, 0) // initlaly ammount was zero then we are keep adding price of each item
         setSubTotal(sum.toFixed(2));
     }
 

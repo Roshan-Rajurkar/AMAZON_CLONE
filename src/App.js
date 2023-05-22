@@ -7,12 +7,20 @@ import Checkout from './pages/checkout/Checkout';
 function App() {
   return (
     <Router>
-      <h1 style={{ backgroundColor: 'red' }}>let's go from 2:26:00</h1>
+      <h1 style={{ backgroundColor: 'red' }}>let's go from 3:43:33</h1>
       <div className="App">
         {/* header must be common all over the pages */}
         <Header />
 
         <Routes>
+          {/* for the checkout page */}
+          <Route exact path='/login' element={
+            <>
+              <h1>Login Page</h1>
+            </>
+          } />
+
+
           {/* for the checkout page */}
           <Route exact path='/checkout' element={
             <>
