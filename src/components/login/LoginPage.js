@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
 import './LoginPage.css'
 import PrimeLogo from '../../assets/primeLogo.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { auth } from '../../firebase';
 
 const LoginPage = () => {
+
+
+    // useHistory Hook
+    const navigate = useNavigate(); // it will help us in the navigation
+
     // email and password state
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,6 +17,16 @@ const LoginPage = () => {
     // signing in in the application
     const signIn = (e) => {
         e.preventDefault();
+
+        auth
+            .signInWithEmailAndPassword(email, password)
+            .then((user) => {
+                // alert(user.user.multiFactor.user.email);
+                if (user) {
+                    navigate('/')
+                }
+            })
+            .catch((err) => alert(err.message))
 
         // login through the firebase
 
@@ -21,6 +37,17 @@ const LoginPage = () => {
         e.preventDefault();
 
         // registering through the firebase
+        auth.createUserWithEmailAndPassword(email, password) // this will create the user in the firebase
+            .then((user) => {
+                console.log(user); // after successfully creating user in the firebase it will return the auth object
+
+                // if the use successfully get register and we found the user as a result then we are pushing to the home navigation
+                if (user) {
+                    alert("Your account created Now Try to sign In");
+                    navigate('/')
+                }
+            })
+            .catch((err) => alert(err.message))
 
     }
 

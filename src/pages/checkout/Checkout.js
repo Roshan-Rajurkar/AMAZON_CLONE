@@ -8,14 +8,15 @@ import { useStateValue } from '../../components/stateProvider/StateProvider';
 
 const Checkout = () => {
 
-    const [{ cart }] = useStateValue();
+    const [{ cart, user }] = useStateValue();
 
     return (
         <div className='checkout' >
             <div className="checkout__left">
-                <img className='checkout__ad' src="https://images-eu.ssl-images-amazon.com/images/G/31/img19/AmazonPay/PrimeRewards/LP_Revamp/PC_Header_Banner._CB468631809_.jpg" alt="" />
 
                 <div>
+                    <h4>Hey, {user?.email}</h4>
+                    {/* we are adding optional chaining just because it should no break app when it value not available bcz it can be a async  */}
                     <h2 className='checkout__title'>
                         Your Shopping Cart
                     </h2>

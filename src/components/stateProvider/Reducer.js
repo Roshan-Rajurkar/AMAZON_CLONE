@@ -1,9 +1,9 @@
 export const initialState = {
     cart: [],
+    user: null, // this get activated when we login to the app
 }
 
 const reducer = (state, action) => {
-    console.log(action)
     switch (action.type) {
         case 'ADD_TO_CART':
             return {
@@ -31,6 +31,12 @@ const reducer = (state, action) => {
                 ...state,
                 // update the cart by newCart
                 cart: newCart
+            }
+
+        case 'SET_USER':
+            return {
+                ...state,
+                user: action.user
             }
 
         default:

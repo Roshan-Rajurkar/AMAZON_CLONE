@@ -3,7 +3,6 @@ import StarIcon from '@mui/icons-material/Star';
 import './Product.css'
 import { useStateValue } from '../stateProvider/StateProvider'
 
-
 const Product = ({ id, title, image, price, rating }) => {
     const renderStars = () => {
         const stars = [];
@@ -14,7 +13,6 @@ const Product = ({ id, title, image, price, rating }) => {
     }
 
     const [{ cart }, dispatch] = useStateValue();
-    console.log('this is the basket', cart)
 
     const addToBasket = () => {
         // dispatch action addToBasket
@@ -36,7 +34,7 @@ const Product = ({ id, title, image, price, rating }) => {
         <div className='product'>
 
             <div className="product_info">
-                <p>
+                <p className='product__title'>
                     {title}
                 </p>
                 <p className='product__price'>
