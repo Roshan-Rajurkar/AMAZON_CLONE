@@ -1,12 +1,15 @@
 import React from 'react'
 import './Header.css'
 import logo from '../../assets/amazon_logo.png'
-import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { FaShoppingCart } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../stateProvider/StateProvider';
 import { auth } from '../../firebase'
-const Header = () => {
+import { useLocation } from 'react-router-dom';
+
+const Header = ({ searchQuery, getSearchQuery }) => {
+    const location = useLocation();
+    const isSearchDisabled = location.pathname !== '/';
 
     const [{ cart, user }, dispatch] = useStateValue();
 
@@ -24,8 +27,12 @@ const Header = () => {
 
             {/* header search Bar */}
             <div className="header__search">
-                <input className='header__searchInput' type="text" />
-                <SearchIcon className='header_searchIcon' />
+                <input className='header__searchInput'
+                    type="text"
+                    placeholder='search for product'
+                    value={searchQuery}
+                    onChange={e => getSearchQuery(e.target.value)}
+                    disabled={isSearchDisabled} />
             </div>
 
             {/* header navigation */}
@@ -42,7 +49,7 @@ const Header = () => {
 
                 <Link to='/checkout'>
                     <div className="header_shoppingCart">
-                        <ShoppingCartIcon className='header__shoppingCartIcon' />
+                        <FaShoppingCart className='header__shoppingCartIcon' />
                         <span className='header__optionTwo header__basketCount'>{cart?.length}</span>
                     </div>
                 </Link>

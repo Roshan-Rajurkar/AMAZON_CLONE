@@ -1,0 +1,35 @@
+.footer {
+    background-color: #232F3E;
+    padding: 10px 0;
+    color: #fff;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    max-width: 100px;
+    height: auto;
+}
+
+.footer-content p {
+    margin: 0;
+}
+
+.portfolio-link a {
+    text-decoration: none;
+    color: #555;
+}
+
+.portfolio-link a:hover {
+    color: #000;
+}

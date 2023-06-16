@@ -13,7 +13,6 @@ const reducer = (state, action) => {
 
         case 'REMOVE_FROM_CART':
             // we can have items of same id's so we are finding the fist index of same items (it any)
-
             const index = state.cart.findIndex(
                 (cartItem) => cartItem.id === action.id
             );

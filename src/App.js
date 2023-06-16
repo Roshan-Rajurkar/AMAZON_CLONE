@@ -6,26 +6,32 @@ import Checkout from './pages/checkout/Checkout';
 import LoginPage from './components/login/LoginPage';
 import { auth } from './firebase'
 import { useStateValue } from './components/stateProvider/StateProvider';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Payment from './components/payment/Payment';
+
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import Footer from './components/footer/Footer';
+
+const promise = loadStripe('pk_test_51NGxszSDM9DrFdk9kCSgZLqiaEvG2143rpWqeqBSpzQYGJr23BO0kFjrKb1p77dLj9zsvtZl5iJDX6aCp5ApE8Zr00nt9Awv50')
 
 function App() {
 
-  const [{ user }, dispatch] = useStateValue();
-  console.log(user)
+  const [{ }, dispatch] = useStateValue();
+  const [searchQuery, setSearchQuery] = useState('');
+  // console.log(user)
 
   useEffect(() => {
 
     // use are givin user access after signing
     auth.onAuthStateChanged(authUser => {
-      console.log("account sign In")
-      console.log('The user is >>>> ', authUser)
+      console.log('The user is >>>> ', authUser.multiFactor.user.email)
 
 
       if (authUser) {
-        // we are setting user if we have auth changed
         dispatch({
           type: "SET_USER",
-          // as a payload we are pad ding the authUser 
+          // as a payload we are passing the authUser 
           user: authUser.multiFactor.user
         })
       }
@@ -41,14 +47,18 @@ function App() {
     })
   }, [])
 
+  const getSearchQuery = (value) => {
+    setSearchQuery(value);
+  }
+
   return (
     <Router>
 
-      <h1 style={{ backgroundColor: 'red' }}>let's go from 4:43:00</h1>
+      {/* <h1 style={{ backg
+        oundColor: 'red' }}>let's go from 6:20:00</h1> */}
 
       <div className="App">
         {/* header must be common all over the pages */}
-
 
         <Routes>
           {/* for the checkout page */}
@@ -66,15 +76,25 @@ function App() {
             </>
           } />
 
-          {/* For the Home page */}
-          <Route exact path="/" element={
+          {/* for the payment page */}
+          <Route exact path='/payment' element={
             <>
               <Header />
-              <Home />
+              <Elements stripe={promise}>
+                <Payment />
+              </Elements>
             </>
           } />
 
+          {/* For the Home page */}
+          <Route exact path="/" element={
+            <>
+              <Header searchQuery={searchQuery} getSearchQuery={getSearchQuery} />
+              <Home searchQuery={searchQuery} />
+            </>
+          } />
         </Routes>
+        <Footer />
       </div>
     </Router >
   );

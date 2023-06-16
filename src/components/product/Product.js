@@ -1,13 +1,15 @@
 import React from 'react'
-import StarIcon from '@mui/icons-material/Star';
+import { FaStar } from 'react-icons/fa'
 import './Product.css'
 import { useStateValue } from '../stateProvider/StateProvider'
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 const Product = ({ id, title, image, price, rating }) => {
     const renderStars = () => {
         const stars = [];
         for (let i = 0; i < rating; i++) {
-            stars.push(<StarIcon className='product__startIcon' key={i} />)
+            stars.push(<FaStar className='product__startIcon' key={i} />)
         }
         return stars;
     }
