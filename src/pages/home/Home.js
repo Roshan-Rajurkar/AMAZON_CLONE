@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import './Home.css';
 import Product from '../../components/product/Product';
 
-const Home = ({ searchQuery }) => {
+const Home = ({ searchQuery, getProductDetails }) => {
 
     const [products, setProducts] = useState([]);
 
@@ -13,65 +13,65 @@ const Home = ({ searchQuery }) => {
 
     const [loading, setLoading] = useState(true);
 
-    const [visible, setVisible] = useState(4);
+    const [visible, setVisible] = useState(3);
 
     useEffect(() => {
 
         const fetchedProducts = [
             {
                 id: uuidv4(),
-                title: 'Samsung 860 EVO 500GB SATA 2.5" Internal Solid State Drive (SSD)',
-                price: '25225.10',
-                image: 'https://m.media-amazon.com/images/I/61m1LYBVQiL._AC_UY327_FMwebp_QL65_.jpg',
+                title: 'Apple 2023 MacBook Pro Laptop M2 Pro chip with 12‑core CPU and 19‑core GPU: 33.74 cm (16.2-inch), 16GB Unified Memory,1TB SSD Storage. Works with iPhone/iPad; Space Grey',
+                price: '248980.00',
+                image: 'https://m.media-amazon.com/images/I/61Ph34V0YAL._AC_UY327_FMwebp_QL65_.jpg',
                 category: 'electronics',
                 rating: 4,
             },
             {
                 id: uuidv4(),
-                title: 'Jordan Mens Air',
-                price: '41000.00',
-                image: 'https://m.media-amazon.com/images/I/61lHu4-ESDS._AC_UL600_FMwebp_QL65_.jpg',
+                title: `White, Pollen, Jordan Point Lane Men's Running Shoes`,
+                price: '12491.00',
+                image: 'https://m.media-amazon.com/images/I/31cvPoqJt2L._AC_UL600_FMwebp_QL65_.jpg',
                 category: 'footwear',
-                rating: 3,
+                rating: 5,
             },
             {
                 id: uuidv4(),
-                title: 'Allen Solly Mens Plain Regular fit T- Shirt',
+                title: `Men's Cotton Hooded Neck Hoodies`,
                 price: '739.00',
-                image: 'https://m.media-amazon.com/images/I/41AuKMYzx4L._AC_SR480,600_.jpg',
+                image: 'https://m.media-amazon.com/images/I/51VmIOwoLDL._AC_UL600_QL65_.jpg',
                 category: 'clothing',
                 rating: 4,
             },
             {
                 id: uuidv4(),
-                title: 'Apple AirPods Pro',
-                price: '25000.00',
-                image: 'https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_UY327_FMwebp_QL65_.jpg',
+                title: 'boAt Airdopes Atom 81 True Wireless Earbuds with Upto 50H Playtime, Quad Mics ENx™ Tech, 13MM Drivers,Super Low Latency(50ms), ASAP™ Charge, BT v5.3(Opal Black)',
+                price: '899.00',
+                image: 'https://m.media-amazon.com/images/I/6150vg2i4hL._AC_UY327_QL65_.jpg',
                 category: 'electronics',
                 rating: 5,
             },
             {
                 id: uuidv4(),
-                title: 'Mens Carrot Stretchable Jeans',
+                title: 'Men Slim Jeans',
                 price: '970.00',
-                image: 'https://m.media-amazon.com/images/I/71HQSrFtntL._AC_UL600_FMwebp_QL65_.jpg',
+                image: 'https://m.media-amazon.com/images/I/81CCu7aiqXL._AC_UL600_FMwebp_QL65_.jpg',
                 category: 'clothing',
                 rating: 5,
             },
             {
                 id: uuidv4(),
-                title: 'Acer EK220Q 21.5 Inch (54.61 cm) Full HD (1920x1080) VA Panel LCD Monitor with LED Back Light I 1 MS VRB',
-                price: '6700.00',
-                image: 'https://m.media-amazon.com/images/I/81xHjVQPwAL._AC_UL480_QL65_.jpg',
+                title: 'LG 23.8 inch (60.45 cm) Borderless LED 1920x1080 Pixels Monitor - Full HD, IPS Panel with VGA, HDMI, Audio in/Out Ports and in-Built Speakers - 24MP88HV (Silver/White)',
+                price: '13499.00',
+                image: 'https://m.media-amazon.com/images/I/71V4nWYvCoL._AC_UY327_FMwebp_QL65_.jpg',
                 category: 'electronics',
                 rating: 3,
             },
             {
                 id: uuidv4(),
-                title: 'Nike Jordan Play Slide',
-                price: '2546.00',
-                image: 'https://m.media-amazon.com/images/I/51qB2r7eg8L._UY625_.jpg',
-                category: 'footwear',
+                title: 'Portronics Hydra 10 Mechanical Wireless Gaming Keyboard with Bluetooth 5.0 + 2.4 GHz, RGB Lights 16.8 Million Colors, Type C Charging, Compatible with PCs, Smartphones and Tablets(Red)',
+                price: '2799.00',
+                image: 'https://m.media-amazon.com/images/I/611EaZOjMOL._AC_UY327_QL65_.jpg',
+                category: 'electronics',
                 rating: 4,
             },
             {
@@ -129,7 +129,7 @@ const Home = ({ searchQuery }) => {
     };
 
     const setVisibleProducts = () => {
-        setVisible(prevState => prevState + 4)
+        setVisible(prevState => prevState + 3)
     }
 
     return (
@@ -143,14 +143,6 @@ const Home = ({ searchQuery }) => {
 
                         <select
                             className="select-box"
-                            style={{
-                                padding: '8px',
-                                border: '1px solid #ccc',
-                                borderRadius: '4px',
-                                fontSize: '14px',
-                                color: '#333',
-                                backgroundColor: '#fff',
-                            }}
                             value={selectedValue}
                             onChange={e => setSelectedValue(e.target.value)}
                         >
@@ -161,15 +153,6 @@ const Home = ({ searchQuery }) => {
 
                         <select
                             className="select-box"
-                            style={{
-                                padding: '8px',
-                                border: '1px solid #ccc',
-                                borderRadius: '4px',
-                                fontSize: '14px',
-                                color: '#333',
-                                backgroundColor: '#fff',
-                                marginTop: '16px',
-                            }}
                             value={selectedCategory}
                             onChange={handleCategoryChange}
                         >
@@ -183,7 +166,7 @@ const Home = ({ searchQuery }) => {
                         {loading ? (
                             <p>Loading...</p>
                         ) : products.length === 0 ? (
-                            <p>No products found.</p>
+                            <p className="no-products">No product found.</p>
                         ) : (
                             products.slice(0, visible).map(product => (
                                 <Product
@@ -192,7 +175,9 @@ const Home = ({ searchQuery }) => {
                                     title={product.title}
                                     price={product.price}
                                     image={product.image}
+                                    category={product.category}
                                     rating={product.rating}
+                                    getProductDetails={getProductDetails}
                                 />
                             ))
                         )}

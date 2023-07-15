@@ -21,19 +21,21 @@
 .checkoutProduct__rating {
     display: flex;
     margin: 5px 0;
+    color: gold;
 }
 
 .checkoutProduct__info>button {
-    background: #FDCC0D;
+    background: #ff5a5f;
     border: 1.5px solid;
-    border-color: #9e8109;
-    margin-top: 10px;
+    border-color: #ff5a5f;
+
     padding: 5px;
     color: #111;
     cursor: pointer;
     width: 150px;
     margin: auto;
     border-radius: 3px;
+    margin-top: 15px;
 }
 
 .checkoutProduct__info>button:hover {

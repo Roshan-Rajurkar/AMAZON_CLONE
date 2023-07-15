@@ -47,9 +47,9 @@
 
 
 .login__signInButton {
-    background: #FDCC0D;
+    background: #f44336;
     border: 1px solid;
-    border-color: #9e8109;
+    border-color: #f44336;
     margin-top: 10px;
     padding: 5px;
     color: #111;

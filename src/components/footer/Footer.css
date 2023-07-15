@@ -1,7 +1,11 @@
+/* Footer.css */
 .footer {
     background-color: #232F3E;
     padding: 10px 0;
     color: #fff;
+    width: 100%;
+    position: relative;
+    margin-top: auto;
 }
 
 .container {
@@ -26,10 +30,11 @@
 }
 
 .portfolio-link a {
+    font-size: 28px;
     text-decoration: none;
-    color: #555;
+    color: #ffffff;
 }
 
 .portfolio-link a:hover {
-    color: #000;
+    color: #aaa2a2;
 }

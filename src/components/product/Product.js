@@ -1,60 +1,69 @@
-import React from 'react'
-import { FaStar } from 'react-icons/fa'
-import './Product.css'
-import { useStateValue } from '../stateProvider/StateProvider'
+import React, { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
+import './Product.css';
+import { useStateValue } from '../stateProvider/StateProvider';
 import 'bootstrap/dist/css/bootstrap.css';
+import { useNavigate } from 'react-router-dom';
 
+const Product = ({ id, title, image, price, category, rating, getProductDetails }) => {
+    const [{ cart }, dispatch] = useStateValue();
+    // const [isTryItOutOpen, setIsTryItOutOpen] = useState(false);
+    // const [uploadedPhoto, setUploadedPhoto] = useState(null);
 
-const Product = ({ id, title, image, price, rating }) => {
-    const renderStars = () => {
-        const stars = [];
-        for (let i = 0; i < rating; i++) {
-            stars.push(<FaStar className='product__startIcon' key={i} />)
+    const navigate = useNavigate();
+
+    const GotoProductPage = (e) => {
+        if (!e.target.classList.contains('add-to-cart-button')) {
+            navigate(`/productDetails`);
+            getProductDetails({
+                id, title, price, image, category, rating
+            });
         }
-        return stars;
     }
 
-    const [{ cart }, dispatch] = useStateValue();
+    // const handlePhotoUpload = (event) => {
+    //     const file = event.target.files[0];
+    //     setUploadedPhoto(URL.createObjectURL(file));
+    // };
 
-    const addToBasket = () => {
-        // dispatch action addToBasket
-        // const id = Math.random().toString(36).substr(2, 9);
+    const addToCart = () => {
         dispatch({
             type: 'ADD_TO_CART',
             item: {
                 id,
                 title,
-                image,
                 price,
+                image,
+                category,
                 rating,
-            }
-        })
-    }
-
+            },
+        });
+    };
 
     return (
         <div className='product'>
-
-            <div className="product_info">
-                <p className='product__title'>
-                    {title}
-                </p>
-                <p className='product__price'>
-                    <small>₹</small>
-                    <strong>{price}</strong>
-                </p>
-                <div className="product__rating">
-                    {renderStars()}
+            <div class="product-card">
+                <img class="product-image" src={image} alt="Product Image" onClick={GotoProductPage} />
+                <div class="product-details" onClick={GotoProductPage}>
+                    <h2 class="product-title">{title}</h2>
+                    <h2 class="product-rating">
+                        {[...Array(rating)].map((_, index) => (
+                            <FaStar className='product__starIcon' key={index} />
+                        ))}
+                    </h2>
+                    <div class="product__price__cat" onClick={GotoProductPage}>
+                        <p class="product-price">
+                            <small>₹</small>
+                            <strong>{price}</strong>
+                        </p>
+                        <p class="product-category" >{category}</p>
+                    </div>
+                    <button class="add-to-cart-button" onClick={addToCart}>Add to Cart</button>
                 </div>
             </div>
-
-            {/* img and add to card button */}
-            <img src={image} alt="product cam" />
-            {/* add to cart button */}
-            <button className='addButton' onClick={addToBasket}>Add To Cart</button>
-
         </div>
-    )
-}
 
-export default Product
+    );
+};
+
+export default Product;

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css'
 import logo from '../../assets/amazon_logo.png'
+import { VscGoToFile } from 'react-icons/vsc'
 
 const Footer = () => {
     return (
@@ -14,8 +15,8 @@ const Footer = () => {
                         <p>&copy; {new Date().getFullYear()} Primezon. All rights reserved.</p>
                     </div>
                     <div className="portfolio-link">
-                        <a href="https://www.yourportfolio.com">
-                            {/* PortFolio Icon */}
+                        <a href="/">
+                            <VscGoToFile />
                         </a>
                     </div>
                 </div>

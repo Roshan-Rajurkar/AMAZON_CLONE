@@ -4,6 +4,7 @@ import Home from '../src/pages/home/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Checkout from './pages/checkout/Checkout';
 import LoginPage from './components/login/LoginPage';
+import ProductDetail from './components/ProductDetail/ProductDetail'
 import { auth } from './firebase'
 import { useStateValue } from './components/stateProvider/StateProvider';
 import { useEffect, useState } from 'react';
@@ -19,13 +20,16 @@ function App() {
 
   const [{ }, dispatch] = useStateValue();
   const [searchQuery, setSearchQuery] = useState('');
+  const [productDetails, setProductDetails] = useState({})
+
+
   // console.log(user)
 
   useEffect(() => {
 
     // use are givin user access after signing
     auth.onAuthStateChanged(authUser => {
-      console.log('The user is >>>> ', authUser.multiFactor.user.email)
+      // console.log('The user is >>>> ', authUser.multiFactor.user.email)
 
 
       if (authUser) {
@@ -51,11 +55,13 @@ function App() {
     setSearchQuery(value);
   }
 
+
+  const getProductDetails = (value) => {
+    setProductDetails(value)
+  }
+
   return (
     <Router>
-
-      {/* <h1 style={{ backg
-        oundColor: 'red' }}>let's go from 6:20:00</h1> */}
 
       <div className="App">
         {/* header must be common all over the pages */}
@@ -65,6 +71,15 @@ function App() {
           <Route exact path='/login' element={
             <>
               <LoginPage />
+            </>
+          } />
+
+          {/* for the checkout page */}
+          <Route exact path='/productDetails' element={
+            <>
+              <Header />
+              <ProductDetail data={productDetails} />
+              <Footer />
             </>
           } />
 
@@ -81,6 +96,7 @@ function App() {
             <>
               <Header />
               <Elements stripe={promise}>
+                {/* <Elements> */}
                 <Payment />
               </Elements>
             </>
@@ -90,11 +106,11 @@ function App() {
           <Route exact path="/" element={
             <>
               <Header searchQuery={searchQuery} getSearchQuery={getSearchQuery} />
-              <Home searchQuery={searchQuery} />
+              <Home searchQuery={searchQuery} getProductDetails={getProductDetails} />
+              <Footer />
             </>
           } />
         </Routes>
-        <Footer />
       </div>
     </Router >
   );
